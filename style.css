@@ -1015,6 +1015,17 @@ img {
     gap: 40px;
   }
 
+  .contact-icon {
+    font-size: 1.2rem;
+    color: var(--primary);
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
   .footer-grid {
     grid-template-columns: 1fr;
     gap: 40px;
@@ -1038,5 +1049,16 @@ img {
   .hero-buttons {
     flex-direction: column;
     align-items: center;
+  }
+
+  .contact-icon {
+    font-size: 1.2rem;
+    color: var(--primary);
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
   }
 }
