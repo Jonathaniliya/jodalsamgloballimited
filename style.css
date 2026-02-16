@@ -829,70 +829,29 @@ img {
 }
 
 .phone-group .iti__dropdown-content {
-  background: var(--dark-3) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: var(--dark-3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 4px;
 }
 
 .phone-group .iti__search-input {
-  background: var(--dark-4) !important;
-  color: var(--white) !important;
-  border-color: rgba(255, 255, 255, 0.1) !important;
+  background: var(--dark-4);
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 .phone-group .iti__country-list {
-  background: var(--dark-3) !important;
-}
-
-.phone-group .iti__country-list .iti__country {
-  background: var(--dark-3) !important;
-}
-
-.phone-group .iti__country-list .iti__country-name {
-  color: var(--light) !important;
-}
-
-.phone-group .iti__country-list .iti__dial-code {
-  color: var(--light) !important;
+  background: var(--dark-3);
 }
 
 .phone-group .iti__country:hover,
 .phone-group .iti__country--highlight {
-  background: var(--dark-4) !important;
+  background: var(--dark-4);
 }
 
-.phone-group .iti__country:hover .iti__country-name,
-.phone-group .iti__country:hover .iti__dial-code,
-.phone-group .iti__country--highlight .iti__country-name,
-.phone-group .iti__country--highlight .iti__dial-code {
-  color: var(--white) !important;
-}
-
-/* Phone input field styling */
-.iti input[type="tel"] {
-  background-color: var(--dark-3) !important;
-  color: var(--white) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  padding: 16px 20px !important;
-}
-
-.iti input[type="tel"]::placeholder {
-  color: var(--gray) !important;
-}
-
-.iti input[type="tel"]:focus {
-  border-color: var(--primary) !important;
-  outline: none !important;
-  box-shadow: 0 0 0 3px rgba(200, 164, 78, 0.1) !important;
-}
-
-.phone-group .iti__flag-container {
-  background-color: var(--dark-3) !important;
-  border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
-}
-
-.iti__selected-flag {
-  background-color: var(--dark-3) !important;
+.phone-group .iti__country-name,
+.phone-group .iti__dial-code {
+  color: var(--light);
 }
 
 .form-group textarea {
@@ -1042,17 +1001,6 @@ img {
     gap: 40px;
   }
 
-  .contact-icon {
-    font-size: 1.2rem;
-    color: var(--primary);
-  }
-
-  .contact-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-  }
-
   .footer-grid {
     grid-template-columns: 1fr;
     gap: 40px;
@@ -1077,58 +1025,4 @@ img {
     flex-direction: column;
     align-items: center;
   }
-
-  .contact-icon {
-    font-size: 1.2rem;
-    color: var(--primary);
-  }
-
-  .contact-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-  }
-  
-  /* Override intl-tel-input library defaults */
-.iti__dropdown-content {
-  background: var(--dark-3) !important;
-  color: var(--white) !important;
-}
-
-.iti__country-list {
-  background: var(--dark-3) !important;
-}
-
-.iti__country {
-  background: var(--dark-3) !important;
-  color: var(--white) !important;
-  padding: 10px !important;
-}
-
-.iti__country-name,
-.iti__dial-code {
-  color: var(--white) !important;
-}
-
-.iti__country:hover,
-.iti__country.iti__highlight {
-  background: var(--dark-4) !important;
-  color: var(--white) !important;
-}
-
-.iti__search-input {
-  background: var(--dark-4) !important;
-  color: var(--white) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-}
-
-.iti__search-input::placeholder {
-  color: var(--gray) !important;
-}
-
-/* Remove the white background from the main dropdown container */
-.iti__dropdown {
-  background: var(--dark-3) !important;
-}
-
 }
