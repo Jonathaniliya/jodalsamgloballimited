@@ -1,15 +1,288 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jodalsamglobal - Planning & Design | Construction Project Management | Procurement | Quality Monitoring | Oil & Gas Distribution</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@21.0.8/build/css/intlTelInput.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
+
 <body>
-    <h1>Contact Us</h1>
-    <ul>
-        <li>Phone: +1234567890</li>
-        <li>Location: 123 Main St, Anytown, USA</li>
-    </ul>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#" class="logo">JODALSAM<span>GLOBAL</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+      </ul>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <img src="images/preview-hero.png" alt="Construction site" class="hero-img" />
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-content">
+      <p class="hero-tag animate-fade-up">Nigeria's Trusted Partner</p>
+      <h1 class="hero-title animate-fade-up delay-1">Building the Future.<br>Powering the Nation.</h1>
+      <p class="hero-sub animate-fade-up delay-2">Planning & Design. Construction Project Management. Procurement. Quality Monitoring. Oil & Gas Distribution.</p>
+      <div class="hero-buttons animate-fade-up delay-3">
+        <a href="#services" class="btn btn-primary">Our Services</a>
+        <a href="#contact" class="btn btn-outline">Get in Touch</a>
+      </div>
+    </div>
+    <div class="scroll-indicator animate-fade-up delay-4">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <section class="stats-bar">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item reveal">
+          <span class="stat-number" data-target="15">0</span><span class="stat-suffix">+</span>
+          <p>Years Experience</p>
+        </div>
+        <div class="stat-item reveal">
+          <span class="stat-number" data-target="200">0</span><span class="stat-suffix">+</span>
+          <p>Projects Completed</p>
+        </div>
+        <div class="stat-item reveal">
+          <span class="stat-number" data-target="12">0</span><span class="stat-suffix"></span>
+          <p>Service Stations</p>
+        </div>
+        <div class="stat-item reveal">
+          <span class="stat-number" data-target="500">0</span><span class="stat-suffix">+</span>
+          <p>Workforce Strong</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-image reveal-left">
+          <img src="images/preview-team.png" alt="Our construction team" />
+          <div class="about-image-accent"></div>
+        </div>
+        <div class="about-text reveal-right">
+          <p class="section-tag">Who We Are</p>
+          <h2 class="section-title">A Legacy of Excellence in Nigeria</h2>
+          <p class="about-desc">Jodalsam Global Limited is a dynamic Nigerian company delivering world-class construction solutions and reliable oil & gas distribution through our network of service stations across Plateau State and beyond.</p>
+          <p class="about-desc">From building critical infrastructure to fuelling communities through our network of service stations, we are committed to quality, safety, and the growth of our nation.</p>
+          <div class="about-features">
+            <div class="about-feature">
+              <div class="feature-icon">&#9670;</div>
+              <div>
+                <h4>Quality Driven</h4>
+                <p>International standards, local expertise</p>
+              </div>
+            </div>
+            <div class="about-feature">
+              <div class="feature-icon">&#9670;</div>
+              <div>
+                <h4>Safety First</h4>
+                <p>Zero-compromise safety protocols</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-tag">What We Do</p>
+        <h2 class="section-title">Our Core Services</h2>
+      </div>
+      <div class="services-grid">
+        <div class="service-card reveal">
+          <div class="service-img-wrap">
+            <img src="images/preview-planning.png" alt="Planning and Design" />
+            <div class="service-img-overlay"></div>
+          </div>
+          <div class="service-content">
+            <div class="service-number">01</div>
+            <h3>Planning & Design</h3>
+            <p>Expert architectural planning and engineering design solutions that bring your vision to life. We create detailed blueprints and plans tailored to your project needs.</p>
+            <a href="#contact" class="service-link">Learn More &rarr;</a>
+          </div>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-img-wrap">
+            <img src="images/preview-oilgas.png" alt="Construction Project Management" />
+            <div class="service-img-overlay"></div>
+          </div>
+          <div class="service-content">
+            <div class="service-number">02</div>
+            <h3>Construction Project Management</h3>
+            <p>End-to-end project management ensuring your construction projects are delivered on time, within budget, and to the highest standards of quality and safety.</p>
+            <a href="#contact" class="service-link">Learn More &rarr;</a>
+          </div>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-img-wrap">
+            <img src="images/preview-procurement.png" alt="Procurement" />
+            <div class="service-img-overlay"></div>
+          </div>
+          <div class="service-content">
+            <div class="service-number">03</div>
+            <h3>Procurement</h3>
+            <p>Strategic sourcing and procurement of quality construction materials and equipment, ensuring cost-effective supply chains for every project.</p>
+            <a href="#contact" class="service-link">Learn More &rarr;</a>
+          </div>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-img-wrap">
+            <img src="images/preview-quality.png" alt="Quality Monitoring Planning" />
+            <div class="service-img-overlay"></div>
+          </div>
+          <div class="service-content">
+            <div class="service-number">04</div>
+            <h3>Quality Monitoring Planning</h3>
+            <p>Comprehensive quality assurance and monitoring systems to ensure every phase of construction meets regulatory standards and exceeds client expectations.</p>
+            <a href="#contact" class="service-link">Learn More &rarr;</a>
+          </div>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-img-wrap">
+            <img src="images/preview-station.png" alt="Oil & Gas Distribution" />
+            <div class="service-img-overlay"></div>
+          </div>
+          <div class="service-content">
+            <div class="service-number">05</div>
+            <h3>Oil & Gas Distribution</h3>
+            <p>Reliable petroleum product distribution through our network of service stations across Plateau State, fuelling communities and driving economic growth.</p>
+            <a href="#contact" class="service-link">Learn More &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section" id="projects">
+    <div class="cta-bg">
+      <img src="images/preview-team.png" alt="Projects" class="cta-bg-img" />
+      <div class="cta-overlay"></div>
+    </div>
+    <div class="container cta-content reveal">
+      <p class="section-tag">Ready to Build?</p>
+      <h2 class="cta-title">Let's Bring Your Vision to Life</h2>
+      <p class="cta-desc">Whether it's planning & design, construction project management, procurement, quality monitoring, or oil & gas distribution &mdash; we're ready to deliver.</p>
+      <a href="#contact" class="btn btn-primary btn-lg">Start a Project</a>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info reveal-left">
+          <p class="section-tag">Get in Touch</p>
+          <h2 class="section-title">Let's Work Together</h2>
+          <p class="contact-desc">Have a project in mind? Reach out and let's discuss how Jodalsamglobal can help you achieve your goals.</p>
+          <div class="contact-details">
+            <div class="contact-item">
+              <span class="contact-icon"><i class="fa-solid fa-envelope"></i></span>
+              <div>
+                <h4>Email</h4>
+                <p>info@jodalsamglobal.com</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon"><i class="fa-solid fa-phone"></i></span>
+              <div>
+                <h4>Phone</h4>
+                <p>+2348036010955</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon"><i class="fa-solid fa-location-dot"></i></span>
+              <div>
+                <h4>Location</h4>
+                <p>Plateau State, Nigeria</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="contact-form-wrap reveal-right">
+          <form class="contact-form" id="contactForm" action="send-mail.php" method="POST">
+            <div class="form-group">
+              <input type="text" name="name" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+              <input type="email" name="email" id="emailInput" placeholder="Your Email" required>
+              <span class="email-error">Please enter a valid email address</span>
+            </div>
+            <div class="form-group phone-group">
+              <input type="tel" name="phone" id="phoneInput" placeholder="Phone Number">
+              <span class="optional-label"><i>Optional</i></span>
+            </div>
+            <div class="form-group">
+              <input type="text" name="subject" placeholder="Subject">
+            </div>
+            <div class="form-group">
+              <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="logo">JODALSAM<span>GLOBAL</span></a>
+          <p>Building the future, powering the nation. Nigeria's trusted construction and energy partner.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#services">Planning & Design</a></li>
+            <li><a href="#services">Project Management</a></li>
+            <li><a href="#services">Procurement</a></li>
+            <li><a href="#services">Quality Monitoring</a></li>
+            <li><a href="#services">Oil & Gas Distribution</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Jodalsam Global Limited. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@21.0.8/build/js/intlTelInput.min.js"></script>
+  <script src="script.js"></script>
 </body>
+
 </html>
