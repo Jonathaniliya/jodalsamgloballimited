@@ -15,6 +15,23 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
+// Load mail configuration
+$configPath = dirname(__DIR__) . '/mail-config.php';
+if (!file_exists($configPath)) {
+    http_response_code(500);
+    echo json_encode(['ok'=>false,'error'=>'Mail configuration file not found']);
+    exit;
+}
+$config = require $configPath;
+if (!is_array($config) || !isset($config['smtp_host'], $config['smtp_user'], $config['smtp_pass'])) {
+    http_response_code(500);
+    echo json_encode(['ok'=>false,'error'=>'Invalid mail configuration']);
+    exit;
+}
+$smtpHost = $config['smtp_host'];
+$smtpUser = $config['smtp_user'];
+$smtpPass = $config['smtp_pass'];
+
 $name    = trim($_POST['name'] ?? '');
 $email   = trim($_POST['email'] ?? '');
 $phone   = trim($_POST['phone'] ?? '');
@@ -37,10 +54,6 @@ $safePhone   = htmlspecialchars($phone, ENT_QUOTES, 'UTF-8');
 $safeSubject = htmlspecialchars($subject, ENT_QUOTES, 'UTF-8');
 $safeMessage = nl2br(htmlspecialchars($message, ENT_QUOTES, 'UTF-8'));
 
-$smtpHost = 'smtp.hostinger.com';
-$smtpUser = 'contact@jodalsamglobal.com';
-$smtpPass = '########';
-
 $mail = new PHPMailer(true);
 
 try {
@@ -56,7 +69,7 @@ try {
     // ===== EMAIL 1: TO ADMIN (Notification) =====
     $mail->setFrom('contact@jodalsamglobal.com', $safeName);
     $mail->addReplyTo($safeEmail, $safeName);
-    $mail->addAddress('contact@jodalsamglobal.com');
+    $mail->addAddress('info@jodalsamglobal.com');
 
     $adminBody = "
         <h2>New Website Enquiry</h2>
