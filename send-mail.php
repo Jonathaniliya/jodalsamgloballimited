@@ -39,7 +39,7 @@ $safeMessage = nl2br(htmlspecialchars($message, ENT_QUOTES, 'UTF-8'));
 
 $smtpHost = 'smtp.hostinger.com';
 $smtpUser = 'info@jodalsamglobal.com';
-$smtpPass = '######';
+$smtpPass = '########';
 
 $mail = new PHPMailer(true);
 
@@ -54,7 +54,7 @@ try {
     $mail->CharSet    = 'UTF-8';
 
     // ===== EMAIL 1: TO ADMIN (Notification) =====
-    $mail->setFrom('info@jodalsamglobal.com', 'Jodalsamglobal Limited');
+    $mail->setFrom('info@jodalsamglobal.com', 'Jodalsam Global Limited');
     $mail->addAddress('info@jodalsamglobal.com');
 
     $adminBody = "
@@ -108,17 +108,17 @@ try {
             </div>
             <div style='padding:30px; background:#ffffff;'>
                 <p>Dear $safeName,</p>
-                <p>Thank you for reaching out to <strong>Jodalsamglobal Limited</strong>. We have received your message and a member of our team will get back to you within 24-48 hours.</p>
+                <p>Thank you for reaching out to <strong>Jodalsam Global Limited</strong>. We have received your message and a member of our team will get back to you within 24-48 hours.</p>
                 <p><strong>Here is a summary of your enquiry:</strong></p>
                 <div style='background:#f5f5f5; padding:15px; border-left:4px solid #d4a815; margin:15px 0;'>
                     <p style='margin:5px 0;'><strong>Subject:</strong> $safeSubject</p>
                     <p style='margin:5px 0;'><strong>Message:</strong> $safeMessage</p>
                 </div>
-                <p>If your matter is urgent, please do not hesitate to call us at <strong>08036010955</strong>.</p>
+                <p>If your matter is urgent, please do not hesitate to call us at <strong>+23436010955</strong>.</p>
                 <p>Warm regards,<br><strong>The Jodalsam Global Team</strong></p>
             </div>
             <div style='background:#0a1e3d; padding:20px; text-align:center;'>
-                <p style='color:#888; font-size:12px; margin:0;'>Jodalsamglobal Limited | Plateau State, Nigeria</p>
+                <p style='color:#888; font-size:12px; margin:0;'>Jodalsam Global Limited | Plateau State, Nigeria</p>
                 <p style='color:#888; font-size:12px; margin:5px 0 0;'>info@jodalsamglobal.com</p>
             </div>
         </div>
@@ -126,7 +126,7 @@ try {
 
     $mail->Subject = 'Thank You for Your Enquiry';
     $mail->Body    = $clientBody;
-    $mail->AltBody = "Dear $name,\n\nThank you for reaching out to Jodalsamglobal Limited. We have received your message and a member of our team will get back to you within 24-48 hours.\n\nSubject: $subject\n\nMessage:\n$message\n\nIf your matter is urgent, please call us at 08036010955.\n\nWarm regards,\nThe Jodalsam Global Team";
+    $mail->AltBody = "Dear $name,\n\nThank you for reaching out to Jodalsam Global Limited. We have received your message and a member of our team will get back to you within 24-48 hours.\n\nSubject: $subject\n\nMessage:\n$message\n\nIf your matter is urgent, please call us at +23436010955.\n\nWarm regards,\nThe Jodalsam Global Team";
 
     $mail->send();
 
