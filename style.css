@@ -987,6 +987,172 @@ img {
   }
 }
 
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-80px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(80px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(212, 168, 21, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(212, 168, 21, 0.4);
+  }
+}
+
+@keyframes navSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes textReveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* Navbar entrance animation */
+.navbar {
+  animation: navSlideDown 0.8s ease forwards;
+}
+
+/* Shimmer effect on logo */
+.logo span {
+  background: linear-gradient(90deg, var(--primary) 0%, #f0d060 50%, var(--primary) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+
+/* Enhanced button hover with glow */
+.btn-primary:hover {
+  animation: pulseGlow 1.5s ease-in-out infinite;
+}
+
+/* Float effect on about image accent */
+.about-image-accent {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Service card image overlay shimmer on hover */
+.service-card:hover .service-img-overlay {
+  background: linear-gradient(to top, var(--dark-3) 0%, rgba(212, 168, 21, 0.05) 40%, transparent 60%);
+  transition: background 0.6s ease;
+}
+
+/* Text reveal for hero elements */
+.hero-tag {
+  animation: textReveal 0.8s ease forwards;
+  animation-delay: 0.2s;
+  opacity: 0;
+}
+
+.hero-title {
+  animation: textReveal 0.8s ease forwards;
+  animation-delay: 0.4s;
+  opacity: 0;
+}
+
+.hero-sub {
+  animation: textReveal 0.8s ease forwards;
+  animation-delay: 0.6s;
+  opacity: 0;
+}
+
+.hero-buttons {
+  animation: textReveal 0.8s ease forwards;
+  animation-delay: 0.8s;
+  opacity: 0;
+}
+
+/* Footer link hover arrow animation */
+.footer-links a:hover {
+  padding-left: 8px;
+  transition: padding-left 0.3s ease, color 0.3s ease;
+}
+
+/* Smooth scale on nav CTA hover */
+.nav-cta:hover {
+  transform: scale(1.05) !important;
+  transition: transform 0.3s ease, background 0.3s ease !important;
+}
+
+/* Contact icon float on hover */
+.contact-item:hover .contact-icon {
+  animation: float 2s ease-in-out infinite;
+}
+
+/* Stat number count-up feel */
+.stat-number {
+  transition: transform 0.3s ease;
+}
+
+.stat-item:hover .stat-number {
+  transform: scale(1.1);
+}
+
 @media (max-width: 968px) {
   .nav-links {
     position: fixed;
