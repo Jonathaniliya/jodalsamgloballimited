@@ -868,6 +868,33 @@ img {
   color: var(--white) !important;
 }
 
+/* Phone input field styling */
+.iti input[type="tel"] {
+  background-color: var(--dark-3) !important;
+  color: var(--white) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  padding: 16px 20px !important;
+}
+
+.iti input[type="tel"]::placeholder {
+  color: var(--gray) !important;
+}
+
+.iti input[type="tel"]:focus {
+  border-color: var(--primary) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(200, 164, 78, 0.1) !important;
+}
+
+.phone-group .iti__flag-container {
+  background-color: var(--dark-3) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.iti__selected-flag {
+  background-color: var(--dark-3) !important;
+}
+
 .form-group textarea {
   resize: vertical;
   min-height: 120px;
@@ -1061,4 +1088,47 @@ img {
     align-items: flex-start;
     gap: 16px;
   }
+  
+  /* Override intl-tel-input library defaults */
+.iti__dropdown-content {
+  background: var(--dark-3) !important;
+  color: var(--white) !important;
+}
+
+.iti__country-list {
+  background: var(--dark-3) !important;
+}
+
+.iti__country {
+  background: var(--dark-3) !important;
+  color: var(--white) !important;
+  padding: 10px !important;
+}
+
+.iti__country-name,
+.iti__dial-code {
+  color: var(--white) !important;
+}
+
+.iti__country:hover,
+.iti__country.iti__highlight {
+  background: var(--dark-4) !important;
+  color: var(--white) !important;
+}
+
+.iti__search-input {
+  background: var(--dark-4) !important;
+  color: var(--white) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.iti__search-input::placeholder {
+  color: var(--gray) !important;
+}
+
+/* Remove the white background from the main dropdown container */
+.iti__dropdown {
+  background: var(--dark-3) !important;
+}
+
 }
