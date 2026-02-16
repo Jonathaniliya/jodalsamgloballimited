@@ -67,7 +67,7 @@ try {
     $mail->CharSet    = 'UTF-8';
 
     // ===== EMAIL 1: TO ADMIN (Notification) =====
-    $mail->setFrom('contact@jodalsamglobal.com', $safeName);
+    $mail->setFrom('info@jodalsamglobal.com', $safeName);
     $mail->addReplyTo($safeEmail, $safeName);
     $mail->addAddress('info@jodalsamglobal.com');
 
@@ -109,19 +109,39 @@ try {
     $mail->clearReplyTos();
     $mail->clearBCCs();
 
-    $mail->setFrom('contact@jodalsamglobal.com', 'Jodalsam Global Limited');
+    $mail->setFrom('info@jodalsamglobal.com', 'Jodalsam Global Limited');
 
     if ($email) {
         $mail->addAddress($email, $safeName);
     }
 
     $clientBody = "
-        
+        <div style='font-family:Arial,sans-serif; max-width:600px; margin:0 auto; color:#333;'>
+            <div style='background:#0a1e3d; padding:30px; text-align:center;'>
+                <h1 style='color:#d4a815; margin:0; font-size:24px;'>JODALSAM GLOBAL</h1>
+            </div>
+            <div style='padding:30px; background:#ffffff;'>
+                <p>Dear $safeName,</p>
+                <p>Thank you for reaching out to <strong>Jodalsamglobal Limited</strong>. We have received your message and a member of our team will get back to you within 24-48 hours.</p>
+                <p><strong>Here is a summary of your enquiry:</strong></p>
+                <div style='background:#f5f5f5; padding:15px; border-left:4px solid #d4a815; margin:15px 0;'>
+                    <p style='margin:5px 0;'><strong>Subject:</strong> $safeSubject</p>
+                    <p style='margin:5px 0;'><strong>Message:</strong> $safeMessage</p>
+                </div>
+                <p>If your matter is urgent, please do not hesitate to call us at <strong>08036010955</strong>.</p>
+                <p>Warm regards,<br><strong>The Jodalsam Global Team</strong></p>
+            </div>
+            <div style='background:#0a1e3d; padding:20px; text-align:center;'>
+                <p style='color:#888; font-size:12px; margin:0;'>Jodalsam Global Limited | Plateau State, Nigeria</p>
+                <p style='color:#888; font-size:12px; margin:5px 0 0;'>info@jodalsamglobal.com</p>
+            </div>
+        </div>
     ";
 
+    $mail->isHTML(true);
     $mail->Subject = 'Thank You for Your Enquiry';
     $mail->Body    = $clientBody;
-    $mail->AltBody = "Dear $name,\n\nThank you for reaching out to Jodalsam Global Limited. We have received your message and a member of our team will get back to you within 24-48 hours.\n\nSubject: $subject\n\nMessage:\n$message\n\nIf your matter is urgent, please call us at +2348036010955.\n\nWarm regards,\nThe Jodalsam Global Team";
+    $mail->AltBody = "Dear $name,\n\nThank you for reaching out to Jodalsamglobal Limited. We have received your message and a member of our team will get back to you within 24-48 hours.\n\nSubject: $subject\n\nMessage:\n$message\n\nIf your matter is urgent, please call us at +2348036010955.\n\nWarm regards,\nThe Jodalsam Global Team";
 
     $mail->send();
 
@@ -130,3 +150,4 @@ try {
     http_response_code(500);
     echo json_encode(['ok'=>false,'error'=>$mail->ErrorInfo]);
 }
+?>
