@@ -609,6 +609,22 @@
   margin-top: 6px;
 }
 
+.form-field input.invalid {
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.15);
+}
+
+.form-field .email-error {
+  color: #e74c3c;
+  font-size: 0.8rem;
+  margin-top: 6px;
+  display: none;
+}
+
+.form-field .email-error.visible {
+  display: block;
+}
+
 /* File Upload */
 .file-upload-wrap {
   position: relative;

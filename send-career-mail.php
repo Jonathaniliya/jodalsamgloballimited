@@ -115,6 +115,50 @@ if (isset($_FILES['cvUpload']) && $_FILES['cvUpload']['error'] === UPLOAD_ERR_OK
     exit;
 }
 
+// Handle cover letter file upload (optional)
+$coverLetterPath = null;
+$coverLetterFileName = '';
+if (isset($_FILES['coverLetterUpload']) && $_FILES['coverLetterUpload']['error'] === UPLOAD_ERR_OK) {
+    $coverLetterTmpPath = $_FILES['coverLetterUpload']['tmp_name'];
+    $coverLetterFileName = $_FILES['coverLetterUpload']['name'];
+    $coverLetterSize = $_FILES['coverLetterUpload']['size'];
+    $coverLetterType = $_FILES['coverLetterUpload']['type'];
+    
+    // Validate file type
+    $allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+    if (!in_array($coverLetterType, $allowedTypes)) {
+        http_response_code(400);
+        echo json_encode(['ok'=>false,'error'=>'Cover letter must be a PDF or Word document']);
+        exit;
+    }
+    
+    // Validate file content using magic bytes (file signatures)
+    $finfo = finfo_open(FILEINFO_MIME_TYPE);
+    $detectedType = finfo_file($finfo, $coverLetterTmpPath);
+    finfo_close($finfo);
+    
+    if (!in_array($detectedType, $allowedTypes)) {
+        http_response_code(400);
+        echo json_encode(['ok'=>false,'error'=>'Invalid file format. Cover letter must be a genuine PDF or Word document']);
+        exit;
+    }
+    
+    // Validate file size (5MB max)
+    if ($coverLetterSize > 5 * 1024 * 1024) {
+        http_response_code(400);
+        echo json_encode(['ok'=>false,'error'=>'Cover letter file size must be less than 5MB']);
+        exit;
+    }
+    
+    // Move file to temporary location
+    $coverLetterPath = sys_get_temp_dir() . '/' . uniqid('cover_', true) . '_' . basename($coverLetterFileName);
+    if (!move_uploaded_file($coverLetterTmpPath, $coverLetterPath)) {
+        http_response_code(500);
+        echo json_encode(['ok'=>false,'error'=>'Failed to process cover letter upload']);
+        exit;
+    }
+}
+
 // Sanitize for HTML output
 $safeName = htmlspecialchars($fullName, ENT_QUOTES, 'UTF-8');
 $safeEmail = htmlspecialchars($email, ENT_QUOTES, 'UTF-8');
@@ -125,7 +169,6 @@ $safePosition = htmlspecialchars($position, ENT_QUOTES, 'UTF-8');
 $safeExperience = htmlspecialchars($experience, ENT_QUOTES, 'UTF-8');
 $safeQualification = htmlspecialchars($qualification, ENT_QUOTES, 'UTF-8');
 $safeLinkedIn = htmlspecialchars($linkedIn, ENT_QUOTES, 'UTF-8');
-$safeCoverLetter = nl2br(htmlspecialchars($coverLetter, ENT_QUOTES, 'UTF-8'));
 
 $mail = new PHPMailer(true);
 
@@ -147,6 +190,11 @@ try {
     // Attach CV
     if ($cvPath && file_exists($cvPath)) {
         $mail->addAttachment($cvPath, $cvFileName);
+    }
+    
+    // Attach cover letter if uploaded
+    if ($coverLetterPath && file_exists($coverLetterPath)) {
+        $mail->addAttachment($coverLetterPath, $coverLetterFileName);
     }
 
     $hrBody = "
@@ -210,10 +258,10 @@ try {
                         <td style='padding:10px; border-bottom:1px solid #eee;'><a href='$safeLinkedIn' target='_blank'>$safeLinkedIn</a></td>
                     </tr>
                     " : "") . "
-                    " . ($safeCoverLetter ? "
+                    " . ($coverLetterFileName ? "
                     <tr>
-                        <td style='padding:10px; border-bottom:1px solid #eee; font-weight:bold; vertical-align:top;'>Cover Letter</td>
-                        <td style='padding:10px; border-bottom:1px solid #eee;'>$safeCoverLetter</td>
+                        <td style='padding:10px; border-bottom:1px solid #eee; font-weight:bold;'>Cover Letter</td>
+                        <td style='padding:10px; border-bottom:1px solid #eee;'>Attached: $coverLetterFileName</td>
                     </tr>
                     " : "") . "
                 </table>
@@ -231,7 +279,7 @@ try {
     $mail->isHTML(true);
     $mail->Subject = 'New Job Application — ' . $safePosition . ' — ' . $safeName;
     $mail->Body = $hrBody;
-    $mail->AltBody = "New Job Application\n\nPosition: $position\n\nPersonal Information:\nName: $fullName\nEmail: $email\nPhone: $phone\nLocation: $location\n\nProfessional Information:\nDepartment: $department\nPosition: $position\nExperience: $experience\nQualification: $qualification\n\nLinkedIn: $linkedIn\nCover Letter: $coverLetter\n\nCV/Resume attached: $cvFileName";
+    $mail->AltBody = "New Job Application\n\nPosition: $position\n\nPersonal Information:\nName: $fullName\nEmail: $email\nPhone: $phone\nLocation: $location\n\nProfessional Information:\nDepartment: $department\nPosition: $position\nExperience: $experience\nQualification: $qualification\n\nLinkedIn: $linkedIn\n\nCV/Resume attached: $cvFileName" . ($coverLetterFileName ? "\nCover Letter attached: $coverLetterFileName" : "");
 
     $mail->send();
 
@@ -283,16 +331,22 @@ try {
 
     $mail->send();
 
-    // Clean up uploaded file
+    // Clean up uploaded files
     if ($cvPath && file_exists($cvPath)) {
         unlink($cvPath);
+    }
+    if ($coverLetterPath && file_exists($coverLetterPath)) {
+        unlink($coverLetterPath);
     }
 
     echo json_encode(['ok'=>true]);
 } catch (Exception $e) {
-    // Clean up uploaded file on error
+    // Clean up uploaded files on error
     if ($cvPath && file_exists($cvPath)) {
         unlink($cvPath);
+    }
+    if ($coverLetterPath && file_exists($coverLetterPath)) {
+        unlink($coverLetterPath);
     }
     http_response_code(500);
     echo json_encode(['ok'=>false,'error'=>$mail->ErrorInfo]);

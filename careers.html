@@ -199,6 +199,7 @@
               <div class="form-field">
                 <label>Email Address <span class="required">*</span></label>
                 <input type="email" name="email" id="careerEmail" required placeholder="your.email@example.com">
+                <span class="email-error">Please enter a valid email address</span>
               </div>
               <div class="form-field">
                 <label>Phone Number <span class="required">*</span></label>
@@ -289,9 +290,19 @@
             </div>
 
             <div class="form-field">
-              <label>Cover Letter / Additional Message</label>
-              <textarea name="coverLetter" id="coverLetter" rows="6" placeholder="Tell us why you're interested in this position and what makes you a great fit..."></textarea>
-              <span class="field-hint">Optional - Share why you want to join Jodalsam Global</span>
+              <label>Cover Letter</label>
+              <div class="file-upload-wrap">
+                <input type="file" name="coverLetterUpload" id="coverLetterUpload" class="file-upload-input" accept=".pdf,.doc,.docx">
+                <label for="coverLetterUpload" class="file-upload-label">
+                  <div class="file-upload-text">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <strong>Click to upload Cover Letter</strong>
+                    <span>PDF or Word document (Max 5MB)</span>
+                  </div>
+                </label>
+                <div id="coverLetterFileName" class="file-name"></div>
+              </div>
+              <span class="field-hint">Optional - Upload your cover letter (PDF, DOC, DOCX)</span>
             </div>
           </div>
 

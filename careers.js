@@ -18,8 +18,11 @@ document.addEventListener('DOMContentLoaded', function() {
   const positionSelect = document.getElementById('position');
   const cvInput = document.getElementById('cvUpload');
   const fileName = document.getElementById('fileName');
+  const coverLetterInput = document.getElementById('coverLetterUpload');
+  const coverLetterFileName = document.getElementById('coverLetterFileName');
   const phoneInput = document.getElementById('careerPhone');
   const emailInput = document.getElementById('careerEmail');
+  const emailError = document.querySelector('.email-error');
   
   // Position options by department
   const positionsByDepartment = {
@@ -98,8 +101,23 @@ document.addEventListener('DOMContentLoaded', function() {
     emailInput.addEventListener('input', function() {
       if (emailInput.value && !isRecognizedEmail(emailInput.value)) {
         emailInput.classList.add('invalid');
+        if (emailError) {
+          emailError.classList.add('visible');
+        }
       } else {
         emailInput.classList.remove('invalid');
+        if (emailError) {
+          emailError.classList.remove('visible');
+        }
+      }
+    });
+    
+    emailInput.addEventListener('blur', function() {
+      if (emailInput.value && !isRecognizedEmail(emailInput.value)) {
+        emailInput.classList.add('invalid');
+        if (emailError) {
+          emailError.classList.add('visible');
+        }
       }
     });
   }
@@ -156,6 +174,36 @@ document.addEventListener('DOMContentLoaded', function() {
         fileName.classList.add('visible');
       } else {
         fileName.classList.remove('visible');
+      }
+    });
+  }
+  
+  // Cover letter file upload handler
+  if (coverLetterInput && coverLetterFileName) {
+    coverLetterInput.addEventListener('change', function() {
+      if (coverLetterInput.files.length > 0) {
+        const file = coverLetterInput.files[0];
+        const fileSize = file.size / 1024 / 1024; // Size in MB
+        const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+        
+        if (!allowedTypes.includes(file.type)) {
+          alert('Please upload a PDF or Word document (DOC/DOCX)');
+          coverLetterInput.value = '';
+          coverLetterFileName.classList.remove('visible');
+          return;
+        }
+        
+        if (fileSize > 5) {
+          alert('File size must be less than 5MB');
+          coverLetterInput.value = '';
+          coverLetterFileName.classList.remove('visible');
+          return;
+        }
+        
+        coverLetterFileName.textContent = '📄 ' + file.name;
+        coverLetterFileName.classList.add('visible');
+      } else {
+        coverLetterFileName.classList.remove('visible');
       }
     });
   }
@@ -272,8 +320,8 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('reviewCV').textContent = cvFile ? cvFile.name : '-';
     document.getElementById('reviewLinkedIn').textContent = document.getElementById('linkedIn').value || '-';
     
-    const coverLetter = document.getElementById('coverLetter').value;
-    document.getElementById('reviewCoverLetter').textContent = coverLetter || '-';
+    const coverLetterFile = document.getElementById('coverLetterUpload').files[0];
+    document.getElementById('reviewCoverLetter').textContent = coverLetterFile ? coverLetterFile.name : '-';
   }
   
   // Next button handler
