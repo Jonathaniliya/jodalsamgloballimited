@@ -95,10 +95,10 @@ if (isset($_FILES['cvUpload']) && $_FILES['cvUpload']['error'] === UPLOAD_ERR_OK
         exit;
     }
     
-    // Validate file size (5MB max)
-    if ($cvSize > 5 * 1024 * 1024) {
+    // Validate file size (1MB max)
+    if ($cvSize > 1 * 1024 * 1024) {
         http_response_code(400);
-        echo json_encode(['ok'=>false,'error'=>'CV file size must be less than 5MB']);
+        echo json_encode(['ok'=>false,'error'=>'CV file size must be less than 1MB']);
         exit;
     }
     
@@ -143,10 +143,10 @@ if (isset($_FILES['coverLetterUpload']) && $_FILES['coverLetterUpload']['error']
         exit;
     }
     
-    // Validate file size (5MB max)
-    if ($coverLetterSize > 5 * 1024 * 1024) {
+    // Validate file size (1MB max)
+    if ($coverLetterSize > 1 * 1024 * 1024) {
         http_response_code(400);
-        echo json_encode(['ok'=>false,'error'=>'Cover letter file size must be less than 5MB']);
+        echo json_encode(['ok'=>false,'error'=>'Cover letter file size must be less than 1MB']);
         exit;
     }
     

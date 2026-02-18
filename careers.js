@@ -163,8 +163,8 @@ document.addEventListener('DOMContentLoaded', function() {
           return;
         }
         
-        if (fileSize > 5) {
-          alert('File size must be less than 5MB');
+        if (fileSize > 1) {
+          alert('File size must be less than 1MB');
           cvInput.value = '';
           fileName.classList.remove('visible');
           return;
@@ -193,8 +193,8 @@ document.addEventListener('DOMContentLoaded', function() {
           return;
         }
         
-        if (fileSize > 5) {
-          alert('File size must be less than 5MB');
+        if (fileSize > 1) {
+          alert('File size must be less than 1MB');
           coverLetterInput.value = '';
           coverLetterFileName.classList.remove('visible');
           return;
