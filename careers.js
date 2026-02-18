@@ -50,9 +50,53 @@ document.addEventListener('DOMContentLoaded', function() {
   // Email validation
   const emailPattern = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
   
+  // List of recognized email domains (popular providers)
+  const recognizedDomains = [
+    'gmail.com', 'yahoo.com', 'outlook.com', 'hotmail.com', 'live.com',
+    'icloud.com', 'aol.com', 'protonmail.com', 'zoho.com', 'mail.com',
+    'yandex.com', 'gmx.com', 'fastmail.com', 'tutanota.com',
+    // Nigerian domains
+    'yahoo.co.uk', 'googlemail.com', 'me.com',
+    // Business domains - common TLDs
+    '.com', '.net', '.org', '.edu', '.gov', '.ng', '.co.uk', '.com.ng'
+  ];
+  
+  // Function to validate email domain
+  function isRecognizedEmail(email) {
+    if (!emailPattern.test(email)) {
+      return false;
+    }
+    
+    const domain = email.toLowerCase().split('@')[1];
+    if (!domain) return false;
+    
+    // Check if domain matches recognized providers
+    for (let i = 0; i < recognizedDomains.length; i++) {
+      const recognizedDomain = recognizedDomains[i];
+      if (recognizedDomain.startsWith('.')) {
+        // Check TLD endings
+        if (domain.endsWith(recognizedDomain)) {
+          return true;
+        }
+      } else {
+        // Check exact domain match
+        if (domain === recognizedDomain) {
+          return true;
+        }
+      }
+    }
+    
+    // If domain has common business TLDs, accept it
+    if (domain.match(/\.(com|net|org|edu|gov|ng|co\.uk|com\.ng)$/)) {
+      return true;
+    }
+    
+    return false;
+  }
+  
   if (emailInput) {
     emailInput.addEventListener('input', function() {
-      if (emailInput.value && !emailPattern.test(emailInput.value)) {
+      if (emailInput.value && !isRecognizedEmail(emailInput.value)) {
         emailInput.classList.add('invalid');
       } else {
         emailInput.classList.remove('invalid');
@@ -179,7 +223,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     requiredInputs.forEach(function(input) {
       if (input.type === 'email') {
-        if (!input.value || !emailPattern.test(input.value)) {
+        if (!input.value || !isRecognizedEmail(input.value)) {
           input.classList.add('invalid');
           isValid = false;
         } else {
@@ -239,7 +283,11 @@ document.addEventListener('DOMContentLoaded', function() {
         currentStep++;
         if (currentStep > totalSteps) currentStep = totalSteps;
         showStep(currentStep);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        // Scroll to form container instead of top of page
+        const formContainer = document.querySelector('.form-container');
+        if (formContainer) {
+          formContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       } else {
         alert('Please fill in all required fields before proceeding.');
       }
@@ -252,7 +300,11 @@ document.addEventListener('DOMContentLoaded', function() {
       currentStep--;
       if (currentStep < 1) currentStep = 1;
       showStep(currentStep);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      // Scroll to form container instead of top of page
+      const formContainer = document.querySelector('.form-container');
+      if (formContainer) {
+        formContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     });
   }
   
