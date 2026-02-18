@@ -861,41 +861,45 @@
   }
 }
 
-@media (max-width: 480px) {
-  .page-hero {
-    height: 40vh;
-    min-height: 350px;
-  }
+/* ============================================
+   Global intl-tel-input overrides (all screens)
+   ============================================ */
+.iti__dropdown-content {
+  background: var(--dark-3) !important;
+  color: var(--white) !important;
+}
 
-  .page-hero-title {
-    font-size: 1.8rem;
-  }
+.iti__country-list {
+  background: var(--dark-3) !important;
+}
 
-  .values-grid {
-    grid-template-columns: 1fr;
-  }
+.iti__country {
+  background: var(--dark-3) !important;
+  color: var(--white) !important;
+  padding: 10px !important;
+}
 
-  .benefits-grid {
-    grid-template-columns: 1fr;
-  }
+.iti__country-name,
+.iti__dial-code {
+  color: var(--white) !important;
+}
 
-  .form-container {
-    padding: 24px 16px;
-  }
+.iti__country:hover,
+.iti__country.iti__highlight {
+  background: var(--dark-4) !important;
+  color: var(--white) !important;
+}
 
-  .step-progress {
-    margin-bottom: 24px;
-  }
+.iti__search-input {
+  background: var(--dark-4) !important;
+  color: var(--white) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
 
-  .step-label {
-    display: none;
-  }
+.iti__search-input::placeholder {
+  color: var(--gray) !important;
+}
 
-  .form-navigation {
-    flex-direction: column;
-  }
-
-  .btn-nav {
-    width: 100%;
-  }
+.iti__dropdown {
+  background: var(--dark-3) !important;
 }
