@@ -84,6 +84,17 @@ if (isset($_FILES['cvUpload']) && $_FILES['cvUpload']['error'] === UPLOAD_ERR_OK
         exit;
     }
     
+    // Validate file content using magic bytes (file signatures)
+    $finfo = finfo_open(FILEINFO_MIME_TYPE);
+    $detectedType = finfo_file($finfo, $cvTmpPath);
+    finfo_close($finfo);
+    
+    if (!in_array($detectedType, $allowedTypes)) {
+        http_response_code(400);
+        echo json_encode(['ok'=>false,'error'=>'Invalid file format. CV must be a genuine PDF or Word document']);
+        exit;
+    }
+    
     // Validate file size (5MB max)
     if ($cvSize > 5 * 1024 * 1024) {
         http_response_code(400);
@@ -231,7 +242,7 @@ try {
     $mail->clearAttachments();
 
     $mail->setFrom('no-reply@jodalsamglobal.com', 'Jodalsam Global Limited');
-    $mail->addReplyTo('no-reply@jodalsamglobal.com'); // ONE-WAY - cannot reply
+    $mail->addReplyTo('no-reply@jodalsamglobal.com', 'Do Not Reply'); // ONE-WAY - cannot reply
     $mail->addAddress($email, $safeName);
 
     $applicantBody = "
