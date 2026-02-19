@@ -864,64 +864,12 @@ img {
   display: block;
 }
 
-.phone-group .iti {
-  width: 100%;
-}
-
-.phone-group .iti__selected-dial-code {
-  color: var(--white);
-}
-
-.phone-group .iti__arrow {
-  border-top-color: var(--gray);
-}
-
-.phone-group .iti__dropdown-content {
-  background: var(--dark-3) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  border-radius: 4px;
-}
-
-.phone-group .iti__search-input {
-  background: var(--dark-4) !important;
-  color: var(--white) !important;
-  border-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-.phone-group .iti__country-list {
-  background: var(--dark-3) !important;
-}
-
-.phone-group .iti__country-list .iti__country {
-  background: var(--dark-3) !important;
-}
-
-.phone-group .iti__country-list .iti__country-name {
-  color: var(--light) !important;
-}
-
-.phone-group .iti__country-list .iti__dial-code {
-  color: var(--light) !important;
-}
-
-.phone-group .iti__country:hover,
-.phone-group .iti__country--highlight {
-  background: var(--dark-4) !important;
-}
-
-.phone-group .iti__country:hover .iti__country-name,
-.phone-group .iti__country:hover .iti__dial-code,
-.phone-group .iti__country--highlight .iti__country-name,
-.phone-group .iti__country--highlight .iti__dial-code {
-  color: var(--white) !important;
-}
-
 /* Phone input field styling */
 .iti input[type="tel"] {
   background-color: var(--dark-3) !important;
   color: var(--white) !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  padding: 16px 20px !important;
+  padding: 16px 20px 16px 52px !important;
 }
 
 .iti input[type="tel"]::placeholder {
@@ -1302,8 +1250,9 @@ img {
     align-items: flex-start;
     gap: 16px;
   }
-  
-  /* Override intl-tel-input library defaults */
+}
+
+/* Global intl-tel-input overrides (all screens) */
 .iti__dropdown-content {
   background: var(--dark-3) !important;
   color: var(--white) !important;
@@ -1340,9 +1289,6 @@ img {
   color: var(--gray) !important;
 }
 
-/* Remove the white background from the main dropdown container */
 .iti__dropdown {
   background: var(--dark-3) !important;
-}
-
 }
