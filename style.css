@@ -1255,15 +1255,18 @@ img {
 /* Global intl-tel-input overrides (all screens) */
 .iti__dropdown-content {
   background: var(--dark-3) !important;
+  background-color: var(--dark-3) !important;
   color: var(--white) !important;
 }
 
 .iti__country-list {
   background: var(--dark-3) !important;
+  background-color: var(--dark-3) !important;
 }
 
 .iti__country {
   background: var(--dark-3) !important;
+  background-color: var(--dark-3) !important;
   color: var(--white) !important;
   padding: 10px !important;
 }
@@ -1276,11 +1279,13 @@ img {
 .iti__country:hover,
 .iti__country.iti__highlight {
   background: var(--dark-4) !important;
+  background-color: var(--dark-4) !important;
   color: var(--white) !important;
 }
 
 .iti__search-input {
   background: var(--dark-4) !important;
+  background-color: var(--dark-4) !important;
   color: var(--white) !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
@@ -1291,4 +1296,5 @@ img {
 
 .iti__dropdown {
   background: var(--dark-3) !important;
+  background-color: var(--dark-3) !important;
 }
