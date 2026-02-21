@@ -30,6 +30,10 @@ if (!is_array($config) || !isset($config['smtp_host'], $config['smtp_user'], $co
 $smtpHost = $config['smtp_host'];
 $smtpUser = $config['smtp_user'];
 $smtpPass = $config['smtp_pass'];
+$hrSmtpUser = $config['hr_smtp_user'] ?? $smtpUser;
+$hrSmtpPass = $config['hr_smtp_pass'] ?? $smtpPass;
+$noreplySmtpUser = $config['noreply_smtp_user'] ?? $smtpUser;
+$noreplySmtpPass = $config['noreply_smtp_pass'] ?? $smtpPass;
 
 // Get form data
 $fullName = trim($_POST['fullName'] ?? '');
@@ -183,14 +187,14 @@ try {
     $mail->isSMTP();
     $mail->Host = $smtpHost;
     $mail->SMTPAuth = true;
-    $mail->Username = $smtpUser;
-    $mail->Password = $smtpPass;
+    $mail->Username = $hrSmtpUser;
+    $mail->Password = $hrSmtpPass;
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
     $mail->Port = 465;
     $mail->CharSet = 'UTF-8';
 
     // ===== EMAIL 1: TO HR (Job Application) =====
-    $mail->setFrom('no-reply@jodalsamglobal.com', 'Jodalsam Global Careers');
+    $mail->setFrom($hrSmtpUser, 'Jodalsam Global Careers');
     $mail->addReplyTo($safeEmail, $safeName);
     $mail->addAddress('hr@jodalsamglobal.com');
 
@@ -293,16 +297,21 @@ try {
 
     // ===== EMAIL 2: TO APPLICANT (Confirmation - ONE-WAY ONLY) =====
     try {
-    $mail->clearAllRecipients();
-    $mail->clearReplyTos();
-    $mail->clearBCCs();
-    $mail->clearAttachments();
+    $mail2 = new PHPMailer(true);
+    $mail2->isSMTP();
+    $mail2->Host = $smtpHost;
+    $mail2->SMTPAuth = true;
+    $mail2->Username = $noreplySmtpUser;
+    $mail2->Password = $noreplySmtpPass;
+    $mail2->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+    $mail2->Port = 465;
+    $mail2->CharSet = 'UTF-8';
 
-    $mail->setFrom('no-reply@jodalsamglobal.com', 'Jodalsam Global Limited');
-    $mail->addCustomHeader('X-Auto-Response-Suppress', 'All');
-    $mail->addCustomHeader('Auto-Submitted', 'auto-generated');
-    $mail->addCustomHeader('Precedence', 'bulk');
-    $mail->addAddress($email, $safeName);
+    $mail2->setFrom($noreplySmtpUser, 'Jodalsam Global Limited');
+    $mail2->addCustomHeader('X-Auto-Response-Suppress', 'All');
+    $mail2->addCustomHeader('Auto-Submitted', 'auto-generated');
+    $mail2->addCustomHeader('Precedence', 'bulk');
+    $mail2->addAddress($email, $safeName);
 
     $applicantBody = "
         <div style='font-family:Arial,sans-serif; max-width:600px; margin:0 auto; color:#333;'>
@@ -336,12 +345,12 @@ try {
         </div>
     ";
 
-    $mail->isHTML(true);
-    $mail->Subject = 'Application Received — Jodalsam Global Limited';
-    $mail->Body = $applicantBody;
-    $mail->AltBody = "Dear $fullName,\n\nThank you for applying for the $position position at Jodalsam Global Limited.\n\nWe have received your application and our HR team will review it shortly. If your qualifications match our requirements, we will contact you for the next steps.\n\nApplication Summary:\nPosition: $position\nDepartment: $department\nDate Submitted: " . date('F j, Y') . "\n\nWhat happens next?\n- Our HR team will carefully review your application and CV\n- If your profile matches our requirements, we will contact you via email or phone\n- The review process typically takes 1-2 weeks\n\nPlease note: This is an automated confirmation email. Do not reply to this message. If you have any questions, please visit our website or call us at +2348036010955.\n\nBest Regards,\nJodalsam Global Limited\nHR Department";
+    $mail2->isHTML(true);
+    $mail2->Subject = 'Application Received — Jodalsam Global Limited';
+    $mail2->Body = $applicantBody;
+    $mail2->AltBody = "Dear $fullName,\n\nThank you for applying for the $position position at Jodalsam Global Limited.\n\nWe have received your application and our HR team will review it shortly. If your qualifications match our requirements, we will contact you for the next steps.\n\nApplication Summary:\nPosition: $position\nDepartment: $department\nDate Submitted: " . date('F j, Y') . "\n\nWhat happens next?\n- Our HR team will carefully review your application and CV\n- If your profile matches our requirements, we will contact you via email or phone\n- The review process typically takes 1-2 weeks\n\nPlease note: This is an automated confirmation email. Do not reply to this message. If you have any questions, please visit our website or call us at +2348036010955.\n\nBest Regards,\nJodalsam Global Limited\nHR Department";
 
-    $mail->send();
+    $mail2->send();
     } catch (Exception $e2) {
         // Confirmation email failed, but HR already received the application
         error_log('Applicant confirmation email failed: ' . $e2->getMessage());
