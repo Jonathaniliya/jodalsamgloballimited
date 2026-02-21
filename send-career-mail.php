@@ -7,7 +7,6 @@ require __DIR__ . '/phpmailer/src/PHPMailer.php';
 require __DIR__ . '/phpmailer/src/SMTP.php';
 
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
@@ -51,6 +50,14 @@ $location = str_replace(["\r", "\n"], '', $location);
 $department = str_replace(["\r", "\n"], '', $department);
 $position = str_replace(["\r", "\n"], '', $position);
 $linkedIn = str_replace(["\r", "\n"], '', $linkedIn);
+
+// Validate LinkedIn URL — only allow http/https to prevent javascript: links
+if ($linkedIn !== '' && (
+    !filter_var($linkedIn, FILTER_VALIDATE_URL) ||
+    !preg_match('/^https?:\/\//i', $linkedIn)
+)) {
+    $linkedIn = '';
+}
 
 // Validate required fields
 if (empty($fullName) || empty($email) || empty($phone) || empty($location) || 
@@ -251,7 +258,7 @@ try {
                 <table style='width:100%; border-collapse:collapse;'>
                     <tr>
                         <td style='padding:10px; border-bottom:1px solid #eee; font-weight:bold; width:180px;'>CV/Resume</td>
-                        <td style='padding:10px; border-bottom:1px solid #eee;'>Attached: $cvFileName</td>
+                        <td style='padding:10px; border-bottom:1px solid #eee;'>Attached: " . htmlspecialchars($cvFileName, ENT_QUOTES, 'UTF-8') . "</td>
                     </tr>
                     " . ($safeLinkedIn ? "
                     <tr>
@@ -262,7 +269,7 @@ try {
                     " . ($coverLetterFileName ? "
                     <tr>
                         <td style='padding:10px; border-bottom:1px solid #eee; font-weight:bold;'>Cover Letter</td>
-                        <td style='padding:10px; border-bottom:1px solid #eee;'>Attached: $coverLetterFileName</td>
+                        <td style='padding:10px; border-bottom:1px solid #eee;'>Attached: " . htmlspecialchars($coverLetterFileName, ENT_QUOTES, 'UTF-8') . "</td>
                     </tr>
                     " : "") . "
                 </table>
@@ -358,6 +365,6 @@ try {
         unlink($coverLetterPath);
     }
     http_response_code(500);
-    echo json_encode(['ok'=>false,'error'=>$mail->ErrorInfo]);
+    echo json_encode(['ok'=>false,'error'=>'Failed to send application. Please try again later.']);
 }
 ?>

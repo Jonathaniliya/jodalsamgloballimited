@@ -7,7 +7,6 @@ require __DIR__ . '/phpmailer/src/PHPMailer.php';
 require __DIR__ . '/phpmailer/src/SMTP.php';
 
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
@@ -148,6 +147,6 @@ try {
     echo json_encode(['ok'=>true]);
 } catch (Exception $e) {
     http_response_code(500);
-    echo json_encode(['ok'=>false,'error'=>$mail->ErrorInfo]);
+    echo json_encode(['ok'=>false,'error'=>'Failed to send message. Please try again later.']);
 }
 ?>
