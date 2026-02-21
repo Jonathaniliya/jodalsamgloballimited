@@ -87,22 +87,24 @@ img {
   display: flex;
   align-items: center;
   gap: 10px;
+  text-decoration: none;
 }
 
 .logo-icon {
-  height: 43px;
-  width: auto;
+  height: 45px;
+  width: 45px;
   object-fit: cover;
   object-position: top;
-  overflow: hidden;
+  border-radius: 50%;
   filter: brightness(0) saturate(100%) sepia(100%) hue-rotate(15deg) saturate(300%) brightness(85%);
   flex-shrink: 0;
 }
 
 .logo-text {
+  font-family: 'Poppins', sans-serif;
   font-size: 1.4rem;
   font-weight: 800;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   color: var(--white);
 }
 
@@ -1189,6 +1191,7 @@ img {
 @media (max-width: 968px) {
   .logo-icon {
     height: 35px;
+    width: 35px;
   }
 
   .nav-links {
