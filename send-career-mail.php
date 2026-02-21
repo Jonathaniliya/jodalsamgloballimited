@@ -200,6 +200,7 @@ try {
     $hrBody = "
         <div style='font-family:Arial,sans-serif; max-width:700px; margin:0 auto; color:#333;'>
             <div style='background:#0a1e3d; padding:30px; text-align:center;'>
+                <img src='https://jodalsamglobal.com/images/JGL-logo.png' alt='JGL Logo' style='height:50px; margin-bottom:10px; display:block; margin-left:auto; margin-right:auto;'>
                 <h1 style='color:#d4a815; margin:0; font-size:24px;'>NEW JOB APPLICATION</h1>
             </div>
             <div style='padding:30px; background:#ffffff;'>
@@ -284,18 +285,22 @@ try {
     $mail->send();
 
     // ===== EMAIL 2: TO APPLICANT (Confirmation - ONE-WAY ONLY) =====
+    try {
     $mail->clearAllRecipients();
     $mail->clearReplyTos();
     $mail->clearBCCs();
     $mail->clearAttachments();
 
     $mail->setFrom('no-reply@jodalsamglobal.com', 'Jodalsam Global Limited');
-    $mail->addReplyTo('no-reply@jodalsamglobal.com', 'Do Not Reply'); // ONE-WAY - cannot reply
+    $mail->addCustomHeader('X-Auto-Response-Suppress', 'All');
+    $mail->addCustomHeader('Auto-Submitted', 'auto-generated');
+    $mail->addCustomHeader('Precedence', 'bulk');
     $mail->addAddress($email, $safeName);
 
     $applicantBody = "
         <div style='font-family:Arial,sans-serif; max-width:600px; margin:0 auto; color:#333;'>
             <div style='background:#0a1e3d; padding:30px; text-align:center;'>
+                <img src='https://jodalsamglobal.com/images/JGL-logo.png' alt='JGL Logo' style='height:50px; margin-bottom:10px; display:block; margin-left:auto; margin-right:auto;'>
                 <h1 style='color:#d4a815; margin:0; font-size:24px;'>JODALSAM GLOBAL</h1>
             </div>
             <div style='padding:30px; background:#ffffff;'>
@@ -330,6 +335,10 @@ try {
     $mail->AltBody = "Dear $fullName,\n\nThank you for applying for the $position position at Jodalsam Global Limited.\n\nWe have received your application and our HR team will review it shortly. If your qualifications match our requirements, we will contact you for the next steps.\n\nApplication Summary:\nPosition: $position\nDepartment: $department\nDate Submitted: " . date('F j, Y') . "\n\nWhat happens next?\n- Our HR team will carefully review your application and CV\n- If your profile matches our requirements, we will contact you via email or phone\n- The review process typically takes 1-2 weeks\n\nPlease note: This is an automated confirmation email. Do not reply to this message. If you have any questions, please visit our website or call us at +2348036010955.\n\nBest Regards,\nJodalsam Global Limited\nHR Department";
 
     $mail->send();
+    } catch (Exception $e2) {
+        // Confirmation email failed, but HR already received the application
+        error_log('Applicant confirmation email failed: ' . $e2->getMessage());
+    }
 
     // Clean up uploaded files
     if ($cvPath && file_exists($cvPath)) {

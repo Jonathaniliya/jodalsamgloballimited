@@ -397,6 +397,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (data && data.ok) {
           // Success
+          btnSubmit.textContent = 'Application Submitted!';
+          btnSubmit.style.background = '#27ae60';
           showFormMessage('success', 'Application submitted successfully! We will review your application and contact you soon.');
           careersForm.reset();
           fileName.classList.remove('visible');
@@ -407,21 +409,32 @@ document.addEventListener('DOMContentLoaded', function() {
             showStep(currentStep);
             hideFormMessage();
             btnSubmit.textContent = 'Submit Application';
+            btnSubmit.style.background = '';
             btnSubmit.disabled = false;
           }, 3000);
         } else {
           // Error
           const errorMsg = (data && data.error) ? data.error : 'An error occurred. Please try again.';
+          btnSubmit.textContent = 'Failed - Try Again';
+          btnSubmit.style.background = '#e74c3c';
           showFormMessage('error', errorMsg);
-          btnSubmit.textContent = 'Submit Application';
-          btnSubmit.disabled = false;
+          setTimeout(function() {
+            btnSubmit.textContent = 'Submit Application';
+            btnSubmit.style.background = '';
+            btnSubmit.disabled = false;
+          }, 5000);
         }
       })
       .catch(function(err) {
         console.error('Submit error:', err);
         showFormMessage('error', 'Network error. Please check your connection and try again.');
-        btnSubmit.textContent = 'Submit Application';
-        btnSubmit.disabled = false;
+        btnSubmit.textContent = 'Failed - Try Again';
+        btnSubmit.style.background = '#e74c3c';
+        setTimeout(function() {
+          btnSubmit.textContent = 'Submit Application';
+          btnSubmit.style.background = '';
+          btnSubmit.disabled = false;
+        }, 5000);
       });
     });
   }
