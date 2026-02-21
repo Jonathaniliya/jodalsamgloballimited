@@ -84,9 +84,29 @@ img {
   font-weight: 800;
   letter-spacing: 2px;
   color: var(--white);
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.logo span {
+.logo-icon {
+  height: 43px;
+  width: auto;
+  object-fit: cover;
+  object-position: top;
+  overflow: hidden;
+  filter: brightness(0) saturate(100%) sepia(100%) hue-rotate(15deg) saturate(300%) brightness(85%);
+  flex-shrink: 0;
+}
+
+.logo-text {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--white);
+}
+
+.logo-text span {
   color: var(--primary);
 }
 
@@ -1089,7 +1109,8 @@ img {
 }
 
 /* Shimmer effect on logo */
-.logo span {
+.logo span,
+.logo-text span {
   background: linear-gradient(90deg, var(--primary) 0%, #f0d060 50%, var(--primary) 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
@@ -1166,6 +1187,10 @@ img {
 }
 
 @media (max-width: 968px) {
+  .logo-icon {
+    height: 35px;
+  }
+
   .nav-links {
     position: fixed;
     top: 0;
@@ -1238,6 +1263,14 @@ img {
 }
 
 @media (max-width: 480px) {
+  .logo-icon {
+    height: 32px;
+  }
+
+  .logo-text {
+    font-size: 1.1rem;
+  }
+
   .hero-title {
     font-size: 2rem;
   }
